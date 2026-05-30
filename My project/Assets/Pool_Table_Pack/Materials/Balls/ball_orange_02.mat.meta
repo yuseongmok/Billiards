@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3958e067e7e35ab4e90fef1fe2645b01
+timeCreated: 1468685112
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67378
+  packageName: Pool Table Pack
+  packageVersion: 1.3
+  assetPath: Assets/Pool_Table_Pack/Materials/Balls/ball_orange_02.mat
+  uploadId: 888100

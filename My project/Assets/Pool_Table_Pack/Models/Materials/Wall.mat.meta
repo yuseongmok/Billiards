@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: c707063599d3b3947bfa9659b6b1540d
+timeCreated: 1521997022
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67378
+  packageName: Pool Table Pack
+  packageVersion: 1.3
+  assetPath: Assets/Pool_Table_Pack/Models/Materials/Wall.mat
+  uploadId: 888100

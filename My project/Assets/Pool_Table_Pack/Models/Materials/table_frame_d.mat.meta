@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 8bd69a9ef8416fa4395729594bbad268
+timeCreated: 1521994804
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67378
+  packageName: Pool Table Pack
+  packageVersion: 1.3
+  assetPath: Assets/Pool_Table_Pack/Models/Materials/table_frame_d.mat
+  uploadId: 888100

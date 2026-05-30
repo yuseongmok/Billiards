@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 68b62023117559e48a0967330c58f8c9
+timeCreated: 1468685228
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67378
+  packageName: Pool Table Pack
+  packageVersion: 1.3
+  assetPath: Assets/Pool_Table_Pack/Prefabs/Balls/12.prefab
+  uploadId: 888100

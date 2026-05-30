@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7eddeee56a8002242aa7c27bf0610c6d
+timeCreated: 1468685575
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67378
+  packageName: Pool Table Pack
+  packageVersion: 1.3
+  assetPath: Assets/Pool_Table_Pack/Materials/Balls/ball_dark_red_02.mat
+  uploadId: 888100

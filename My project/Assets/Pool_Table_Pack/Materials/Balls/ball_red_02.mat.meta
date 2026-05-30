@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3e356621f0bef1b4da932023c93d7003
+timeCreated: 1468685071
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67378
+  packageName: Pool Table Pack
+  packageVersion: 1.3
+  assetPath: Assets/Pool_Table_Pack/Materials/Balls/ball_red_02.mat
+  uploadId: 888100

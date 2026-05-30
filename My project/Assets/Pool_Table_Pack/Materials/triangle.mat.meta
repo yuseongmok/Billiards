@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 673d9a4bda322094e865da845882b765
+timeCreated: 1468686214
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67378
+  packageName: Pool Table Pack
+  packageVersion: 1.3
+  assetPath: Assets/Pool_Table_Pack/Materials/triangle.mat
+  uploadId: 888100
