@@ -1,5 +1,7 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +16,10 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI turnText;
     public TextMeshProUGUI p1ScoreText;
     public TextMeshProUGUI p2ScoreText;
+
+    public TextMeshProUGUI centerNoticeText; //연출용 텍스트
+
+    public GameObject lobbyButton;// 로비버튼
 
     [Header("이펙트 설정")]
     public GameObject pocketEffectPrefab;
@@ -38,6 +44,10 @@ public class GameManager : MonoBehaviour
         UpdateUI();
         // 게임 시작 시 당구대 위의 모든 공들의 Rigidbody를 미리 찾아둡니다.
         UpdateAllBallReferences();
+
+        if (centerNoticeText != null) centerNoticeText.gameObject.SetActive(false); //시작시 텍스트 꺼둠
+
+        if (lobbyButton != null) lobbyButton.SetActive(false); //로비버튼 꺼둠
     }
 
     void Update()
@@ -114,7 +124,18 @@ public class GameManager : MonoBehaviour
         {
             isGameOver = true;
             int winner = (currentPlayer == 1) ? 2 : 1;
-            turnText.text = $" 승자는 플레이어 {winner}! \n(8번 공 파울)";
+            int loser = currentPlayer;
+
+            string gameOverMessage = $"<color=red>PLAYER {loser} 패배!</color>\n\n 승자는 플레이어 {winner}! ";
+            turnText.text = "게임 종료";
+            if (centerNoticeText != null)
+            {
+                centerNoticeText.gameObject.SetActive(true);
+                centerNoticeText.text = gameOverMessage;
+            }
+
+            if (lobbyButton != null) lobbyButton.SetActive(true); //로비 버튼 꺼내기
+
             return;
         }
 
@@ -137,6 +158,8 @@ public class GameManager : MonoBehaviour
         turnText.text = $"Player {currentPlayer} - 흰 공을 원하는 위치에 클릭하여 배치하세요!";
 
         CameraController.Instance.SetTopView(true); //흰 공이 빠지면 프리 배치를 위해 탑뷰(관전 모드)
+
+        ShowCenterNotice($"<color=yellow>파울!</color>\nPlayer {currentPlayer} 프리볼 차례"); //턴 넘김
     }
 
     public void EndPlacingMode()
@@ -160,9 +183,9 @@ public class GameManager : MonoBehaviour
 
         if (scoredThisTurn)
         {
-            // 자신의 공을 넣었다면 턴을 바꾸지 않고 안내 문구만 띄워줍니다.
-            Debug.Log($"플레이어 {currentPlayer} 점수 획득 성공! 한 번 더 공격합니다.");
-            UpdateUI(); // UI를 다시 그려서 "Player X Turn"을 유지
+            UpdateUI();
+            // 공을 넣어서 턴을 유지할 때 연출
+            ShowCenterNotice("득점 성공!");
         }
         else
         {
@@ -177,6 +200,10 @@ public class GameManager : MonoBehaviour
 
         currentPlayer = (currentPlayer == 1) ? 2 : 1;
         UpdateUI();
+
+        // 화면 중앙에 "PLAYER X TURN"을 크게 띄우고 1.5초 뒤 사라지게 합니다.
+        string colorText = (currentPlayer == 1) ? "<color=#498FF5>Player 1</color>" : "<color=#F54949>Player 2</color>";
+        ShowCenterNotice($"{colorText}턴");
     }
 
     void UpdateUI()
@@ -192,5 +219,46 @@ public class GameManager : MonoBehaviour
     {
         // 꼼꼼한 체크를 위해 씬 안의 모든 Rigidbody를 찾습니다.
         allBallRigidbodies = FindObjectsByType<Rigidbody>(FindObjectsSortMode.None);
+    }
+
+
+    public void ShowCenterNotice(string message)
+    {
+        if (centerNoticeText == null) return;
+        
+        // 기존에 작동 중이던 서서히 사라지는 타이머가 있다면 겹치지 않게 중지시킵니다.
+        StopAllCoroutines(); 
+        // 타이머(코루틴)를 실행합니다.
+        StartCoroutine(NoticeRoutine(message));
+    }
+
+    //글자를 보여줬다가 스르륵 투명하게 지우는 타이머 기능 (코루틴)
+    IEnumerator NoticeRoutine(string message)
+    {
+        centerNoticeText.text = message;
+        centerNoticeText.gameObject.SetActive(true);
+
+        // 1. 글자가 완전히 선명하게 1초 동안 유지됩니다.
+        centerNoticeText.alpha = 1f;
+        yield return new WaitForSeconds(1.0f);
+
+        // 2. 이후 0.5초 동안 스르륵 투명해집니다 (Fade Out 효과)
+        float duration = 0.5f;
+        float currentTime = 0f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            centerNoticeText.alpha = Mathf.Lerp(1f, 0f, currentTime / duration);
+            yield return null; // 다음 프레임까지 대기
+        }
+
+        // 3. 완전히 투명해지면 오브젝트를 꺼서 숨깁니다.
+        centerNoticeText.gameObject.SetActive(false);
+    }
+
+    public void GoToLobby()
+    {
+        // 로비 씬을 다시 불러와 게임을 초기 상태로 되돌립니다.
+        SceneManager.LoadScene("LobbyScene");
     }
 }
